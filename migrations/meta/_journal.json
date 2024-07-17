@@ -8,6 +8,13 @@
       "when": 1721201461360,
       "tag": "0000_grey_black_tarantula",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1721206186413,
+      "tag": "0001_large_lilandra",
+      "breakpoints": true
     }
   ]
 }
