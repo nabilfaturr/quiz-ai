@@ -12,6 +12,7 @@ import { ChromeIcon } from "../Icon/ChromeIcon";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { signIn } from "@/lib/auth";
+import TeacherAuthForm from "../Form/TeacherAuthForm";
 
 type LoginCardProps = {
   role?: "student" | "teacher";
@@ -41,24 +42,8 @@ const TeacherLoginCard = ({ authType }: LoginCardProps) => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter your email" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-            />
-          </div>
+          <TeacherAuthForm type={authType} />
         </CardContent>
-        <CardFooter>
-          <Button className="w-full">
-            {authType === "signin" ? "Login" : "Sign Up"}
-          </Button>
-        </CardFooter>
       </Card>
     </>
   );

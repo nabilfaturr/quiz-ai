@@ -1,0 +1,1 @@
+ALTER TABLE `teacher` ADD `name` text;

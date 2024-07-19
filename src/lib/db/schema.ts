@@ -6,6 +6,17 @@ import {
 } from "drizzle-orm/sqlite-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
+export const teachers = sqliteTable("teacher", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  email: text("email").notNull(),
+  name: text("name"),
+  emailVerified: integer("emailVerified", { mode: "timestamp_ms" }),
+  password: text("password").notNull(),
+  image: text("image"),
+});
+
 export const users = sqliteTable("user", {
   id: text("id")
     .primaryKey()
