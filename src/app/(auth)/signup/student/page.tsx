@@ -4,7 +4,7 @@ import React from "react";
 type StudentSignInPageProps = {};
 
 const StudentSignInPage: React.FC<StudentSignInPageProps> = ({}) => {
-  return <LoginCard role="student" authType="signin"/>;
+  return <LoginCard role="student" authType="signup"/>;
 };
 
 export default StudentSignInPage;
