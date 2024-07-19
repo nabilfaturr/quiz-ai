@@ -1,3 +1,5 @@
+import StudentSignInButton from "@/components/shared/Button/StudentSignInButton";
+import TeacherSignInButton from "@/components/shared/Button/TeacherSignInButton";
 import { Button } from "@/components/ui/button";
 import { auth, signIn, signOut } from "@/lib/auth";
 
@@ -6,15 +8,10 @@ export default async function Home() {
   return (
     <main>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <form
-        action={async () => {
-          "use server";
-
-          await signIn("google");
-        }}
-      >
-        <Button type="submit">Login</Button>
-      </form>
+      <div className="space-y-2 inline-flex flex-col my-4">
+        <StudentSignInButton />
+        <TeacherSignInButton />
+      </div>
       {session && (
         <form
           action={async () => {
