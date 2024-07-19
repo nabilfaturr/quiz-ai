@@ -7,20 +7,37 @@ import {
 import { db } from "@/lib/db";
 import { teachers } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import { signIn } from "@/lib/auth";
 
-export const teacherSignInAction = async (values: TTeacherAuthFormSchema) => {
-  "use server";
-  console.log(values);
-
-  //
-
-  return true;
+export const teacherSignInAction: any = async (
+  values: TTeacherAuthFormSchema
+) => {
+  try {
+    await signIn("credentials", {
+      redirect: false,
+      email: values.email,
+      password: values.password,
+    });
+    return {
+      success: true,
+      status: 200,
+      message: "Login successfully",
+    };
+  } catch (e) {
+    console.error({
+      e,
+      from: "src/actions/auth.action.ts:teacherSignInAction",
+    });
+    return {
+      success: false,
+      status: 500,
+      message: "Something went wrong, Please try again later",
+    };
+  }
 };
 
 export const teacherSignUpAction = async (values: TTeacherAuthFormSchema) => {
-  "use server";
   try {
-
     // server side validation
     const result = TeacherAuthFormSchema.safeParse({
       email: values.email,
@@ -41,7 +58,7 @@ export const teacherSignUpAction = async (values: TTeacherAuthFormSchema) => {
       .select()
       .from(teachers)
       .where(eq(teachers.email, result.data.email))
-      .limit(1)
+      .limit(1);
 
     if (existingUser[0]) {
       return {

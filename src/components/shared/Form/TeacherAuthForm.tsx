@@ -24,6 +24,7 @@ import {
 } from "@/lib/zod/schema";
 import { toast, Toaster } from "sonner";
 import { useRouter } from "next/navigation";
+import { signIn } from "@/lib/auth";
 
 type TeacherAuthFormProps = {
   type: "signin" | "signup";
@@ -47,11 +48,24 @@ const TeacherAuthForm: React.FC<TeacherAuthFormProps> = ({ type }) => {
     setError(false);
     try {
       const result = await teacherSignInAction(values);
-      if (!result) {
+
+
+      if (!result.success) {
         setError(true);
+        toast.error(result.message);
+        return;
       }
+
+      toast.success("Login successfully", {
+        duration: 2000,
+      });
+
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     } catch (e) {
       console.error(e);
+      toast.error("Something went wrong, Please try again later");
       setError(true);
     } finally {
       setLoading(false);
@@ -77,7 +91,6 @@ const TeacherAuthForm: React.FC<TeacherAuthFormProps> = ({ type }) => {
       setTimeout(() => {
         router.push("/signin/teacher");
       }, 2000);
-
     } catch (e) {
       console.error(e);
       toast.error("Something went wrong, Please try again later");

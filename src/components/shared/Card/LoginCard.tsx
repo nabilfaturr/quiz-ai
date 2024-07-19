@@ -11,7 +11,7 @@ import React from "react";
 import { ChromeIcon } from "../Icon/ChromeIcon";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { signIn } from "@/lib/auth";
+import { signIn, signOut } from "@/lib/auth";
 
 type LoginCardProps = {
   role: "student" | "teacher";
@@ -61,7 +61,7 @@ const StudentLoginCard = () => {
         action={async () => {
           "use server";
 
-          await signIn("google", {redirectTo: "/"});
+          await signIn("google", { redirectTo: "/" });
         }}
       >
         <Card>

@@ -3,14 +3,11 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import React from "react";
 import { ChromeIcon } from "../Icon/ChromeIcon";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { signIn } from "@/lib/auth";
 import TeacherAuthForm from "../Form/TeacherAuthForm";
 
