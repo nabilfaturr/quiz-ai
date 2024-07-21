@@ -17,7 +17,7 @@ export const teachers = sqliteTable("teacher", {
   image: text("image"),
 });
 
-export const users = sqliteTable("user", {
+export const students = sqliteTable("student", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
@@ -32,7 +32,7 @@ export const accounts = sqliteTable(
   {
     userId: text("userId")
       .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
+      .references(() => students.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccountType>().notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),

@@ -5,11 +5,14 @@ import Credentials from "next-auth/providers/credentials";
 import { db } from "../db";
 import { TeacherAuthFormSchema } from "../zod/schema";
 import bcryptjs from "bcryptjs";
-import { teachers } from "../db/schema";
+import { accounts, students, teachers } from "../db/schema";
 import { eq } from "drizzle-orm";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: DrizzleAdapter(db),
+  adapter: DrizzleAdapter(db, {
+    usersTable: students,
+    accountsTable: accounts,
+  }),
   providers: [
     Google,
     Credentials({
