@@ -1,7 +1,7 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
 const TeacherPage = () => {
-  return <div>TeacherPage</div>;
+  return redirect("/teacher/dashboard");
 };
 
 export default TeacherPage;
