@@ -9,7 +9,7 @@ type AuthProviderProps = {
 
 const AuthProvider: React.FC<AuthProviderProps> = async ({ children, protectedRoute }) => {
   const session = await auth();
-  const { role } = session?.user;
+  const role = session?.user?.role;
 
   if (protectedRoute === "teacher") {
     if (!session) {
