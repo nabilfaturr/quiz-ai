@@ -20,14 +20,8 @@ const ProfileField = () => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer" asChild>
-          <button
-            onClick={() => console.log("Sign Out")}
-            type="button"
-            className="w-full"
-          >
-            <p className="text-red-500">Sign Out</p>
-          </button>
+        <DropdownMenuItem className="cursor-pointer">
+          <SignOutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

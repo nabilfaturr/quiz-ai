@@ -24,7 +24,6 @@ import {
 } from "@/lib/zod/schema";
 import { toast, Toaster } from "sonner";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/lib/auth";
 
 type TeacherAuthFormProps = {
   type: "signin" | "signup";
@@ -49,7 +48,6 @@ const TeacherAuthForm: React.FC<TeacherAuthFormProps> = ({ type }) => {
     try {
       const result = await teacherSignInAction(values);
 
-
       if (!result.success) {
         setError(true);
         toast.error(result.message);
@@ -61,7 +59,7 @@ const TeacherAuthForm: React.FC<TeacherAuthFormProps> = ({ type }) => {
       });
 
       setTimeout(() => {
-        router.push("/");
+        router.push("/teacher/dashboard");
       }, 2000);
     } catch (e) {
       console.error(e);

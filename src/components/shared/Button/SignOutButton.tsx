@@ -1,7 +1,13 @@
-import { Button } from "@/components/ui/button";
+import { signOutAction } from "@/actions/auth.action";
 
 const SignOutButton = () => {
-  return <button type="button" className="text-red-500">Sign Out</button>;
+  return (
+    <form action={signOutAction}>
+      <button type="submit" className="w-full">
+        <p className="text-red-500 text-left">Sign Out</p>
+      </button>
+    </form>
+  );
 };
 
 export default SignOutButton;

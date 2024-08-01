@@ -7,7 +7,7 @@ import {
 import { db } from "@/lib/db";
 import { teachers } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
-import { signIn } from "@/lib/auth";
+import { signIn, signOut } from "@/lib/auth";
 
 export const teacherSignInAction: any = async (
   values: TTeacherAuthFormSchema
@@ -95,4 +95,8 @@ export const teacherSignUpAction = async (values: TTeacherAuthFormSchema) => {
       message: "Internal server error",
     };
   }
+};
+
+export const signOutAction = async () => {
+  await signOut({ redirectTo: "/" });
 };
