@@ -5,13 +5,13 @@ import Credentials from "next-auth/providers/credentials";
 import { db } from "../db";
 import { TeacherAuthFormSchema } from "../zod/schema";
 import bcryptjs from "bcryptjs";
-import { accounts, students, teachers } from "../db/schema";
+import { accountsTable, studentsTable, teachersTable } from "../db/schema";
 import { eq } from "drizzle-orm";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db, {
-    usersTable: students,
-    accountsTable: accounts,
+    usersTable: studentsTable,
+    accountsTable
   }),
   providers: [
     Google,
@@ -32,8 +32,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         // Check existing user
         const existingUser = await db
           .select()
-          .from(teachers)
-          .where(eq(teachers.email, validatedCredentials.data.email))
+          .from(teachersTable)
+          .where(eq(teachersTable.email, validatedCredentials.data.email))
           .limit(1);
 
         if (!existingUser[0]) {

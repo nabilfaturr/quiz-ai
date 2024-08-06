@@ -36,6 +36,20 @@
       "when": 1721552232075,
       "tag": "0004_square_dracula",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1722916325248,
+      "tag": "0005_ancient_firebird",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1722916953625,
+      "tag": "0006_odd_corsair",
+      "breakpoints": true
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "ad486036-bd14-4ef7-835e-a60752f6edfd",
+  "id": "ac628a6f-3f46-4a25-a4d4-e8043fab9363",
   "prevId": "066ad4f1-b85f-4e88-ada7-4c6ce82ee87b",
   "tables": {
     "account": {
@@ -112,6 +112,115 @@
       },
       "uniqueConstraints": {}
     },
+    "class": {
+      "name": "class",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "classCode": {
+          "name": "classCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "subject": {
+          "name": "subject",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "level": {
+          "name": "level",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "student_class": {
+      "name": "student_class",
+      "columns": {
+        "student_id": {
+          "name": "student_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "class_id": {
+          "name": "class_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "student_class_student_id_student_id_fk": {
+          "name": "student_class_student_id_student_id_fk",
+          "tableFrom": "student_class",
+          "tableTo": "student",
+          "columnsFrom": [
+            "student_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "student_class_class_id_class_id_fk": {
+          "name": "student_class_class_id_class_id_fk",
+          "tableFrom": "student_class",
+          "tableTo": "class",
+          "columnsFrom": [
+            "class_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "student_class_student_id_class_id_pk": {
+          "columns": [
+            "class_id",
+            "student_id"
+          ],
+          "name": "student_class_student_id_class_id_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
     "student": {
       "name": "student",
       "columns": {
@@ -211,9 +320,7 @@
   "enums": {},
   "_meta": {
     "schemas": {},
-    "tables": {
-      "\"user\"": "\"student\""
-    },
+    "tables": {},
     "columns": {}
   },
   "internal": {

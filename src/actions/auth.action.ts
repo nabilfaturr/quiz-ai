@@ -5,7 +5,7 @@ import {
   TeacherAuthFormSchema,
 } from "@/lib/zod/schema";
 import { db } from "@/lib/db";
-import { teachers } from "@/lib/db/schema";
+import { teachersTable } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { signIn, signOut } from "@/lib/auth";
 
@@ -56,8 +56,8 @@ export const teacherSignUpAction = async (values: TTeacherAuthFormSchema) => {
     // check existing user
     const existingUser = await db
       .select()
-      .from(teachers)
-      .where(eq(teachers.email, result.data.email))
+      .from(teachersTable)
+      .where(eq(teachersTable.email, result.data.email))
       .limit(1);
 
     if (existingUser[0]) {
@@ -80,7 +80,7 @@ export const teacherSignUpAction = async (values: TTeacherAuthFormSchema) => {
     };
 
     // store to the db
-    await db.insert(teachers).values(newUser);
+    await db.insert(teachersTable).values(newUser);
 
     return {
       success: true,
@@ -98,5 +98,4 @@ export const teacherSignUpAction = async (values: TTeacherAuthFormSchema) => {
 };
 
 export const signOutAction = async () => {
-  await signOut({ redirectTo: "/" });
 };

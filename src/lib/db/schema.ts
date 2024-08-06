@@ -29,12 +29,13 @@ export const studentsTable = sqliteTable("student", {
 });
 
 export const classTable = sqliteTable("class", {
-  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
-  classCode: text("classCode").notNull().$defaultFn(() => nanoid(6)),
-  name: text("name").notNull(),
-  subject: text("subject").notNull(),
-  level: text("level").notNull(),
-  description: text("description"),
+    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+    classCode: text("classCode").notNull().$defaultFn(() => nanoid(6)),
+    name: text("name").notNull(),
+    subject: text("subject").notNull(),
+    level: text("level").notNull(),
+    description: text("description"),
+    teacherId: text("teacher_id").notNull().references(() => teachersTable.id, { onDelete: 'cascade' }),
 });
 
 export const studentClassTable = sqliteTable('student_class', {
@@ -49,6 +50,7 @@ export const accountsTable = sqliteTable(
   "account",
   {
     userId: text("userId")
+
       .notNull()
       .references(() => studentsTable.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccountType>().notNull(),
