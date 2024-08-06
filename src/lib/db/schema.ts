@@ -38,13 +38,39 @@ export const classTable = sqliteTable("class", {
     teacherId: text("teacher_id").notNull().references(() => teachersTable.id, { onDelete: 'cascade' }),
 });
 
+
+
 export const studentClassTable = sqliteTable('student_class', {
+    studentId: text('student_id').notNull().references(() => studentsTable.id, { onDelete: 'cascade' }),
+    classId: text('class_id').notNull().references(() => classTable.id, { onDelete: 'cascade' }),
+    // using a compound key to join the two tables
+  }, (studentClassTable) => ({
+    pk: primaryKey({columns: [studentClassTable.studentId, studentClassTable.classId]}) // pk is a compound key
+  }));
+
+  `
+  kode ini berhasil berjalan :
+  export const studentClassTable = sqliteTable('student_class', {
+    studentId: text('student_id').notNull().references(() => studentsTable.id, { onDelete: 'cascade' }),
+    classId: text('class_id').notNull().references(() => classTable.id, { onDelete: 'cascade' }),
+    // using a compound key to join the two tables
+  }, (studentClassTable) => ({
+    pk: primaryKey({columns: [studentClassTable.studentId, studentClassTable.classId]}) // pk is a compound key
+  }));
+
+  sedangkan kode ini akan menghasilkan error :
+  export const studentClassTable = sqliteTable('student_class', {
     studentId: text('student_id').notNull().references(() => studentsTable.id, { onDelete: 'cascade' }),
     classId: text('class_id').notNull().references(() => classTable.id, { onDelete: 'cascade' }),
     // using a compound key to join the two tables
   }, (table) => ({
     pk: primaryKey({columns: [table.studentId, table.classId]}) // pk is a compound key
   }));
+
+  bisakah kamu memberi penjelasan detail nya?
+
+  Tech stack : Nextjs 14, Drizzle, SQLite
+  `
 
 export const accountsTable = sqliteTable(
   "account",
