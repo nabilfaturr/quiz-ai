@@ -19,14 +19,16 @@ const links = [
 
 const Navbar = () => {
   return (
-    <div className="py-3 flex items-center justify-between">
-      <div className="flex items-center gap-20">
-        <MainLogo />
+    <div className="w-screen border-b">
+      <div className="max-w-5xl mx-auto py-3 flex items-center justify-between">
+        <div className="flex items-center gap-20">
+          <MainLogo />
         <NavItems />
-      </div>
-      <div className="flex items-center gap-3">
-        <ThemeField />
-        <ProfileField />
+        </div>
+        <div className="flex items-center gap-3">
+          <ThemeField />
+          <ProfileField />
+        </div>
       </div>
     </div>
   );

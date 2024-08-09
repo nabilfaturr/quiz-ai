@@ -1,5 +1,5 @@
-"use class"
+"use server";
 
-export const createClass = async () => {
-    
-}
+export const createClassAction = async (formData: any) => {
+  console.log(formData, "server action");
+};

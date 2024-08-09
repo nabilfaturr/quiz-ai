@@ -59,12 +59,32 @@
   }
 }
 
+/*
+primary : blue-700
+*/
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply bg-[#f4f4f4] text-foreground;
+    @apply bg-white text-foreground;
+  }
+
+  .btn-create {
+    @apply px-4 py-2 bg-blue-600 rounded text-white font-medium whitespace-nowrap hover:bg-blue-700;
+  }
+
+  .btn-delete {
+    @apply px-4 py-2 bg-red-600 rounded text-white font-medium whitespace-nowrap hover:bg-red-700;
+  }
+
+  .align-vertical {
+   @apply relative top-1/2 transform -translate-y-1/2
+  }
+
+  .heading-1 {
+    @apply text-3xl font-bold;
   }
 
 }

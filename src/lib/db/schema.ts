@@ -5,7 +5,7 @@ import {
   primaryKey,
 } from "drizzle-orm/sqlite-core";
 import type { AdapterAccountType } from "next-auth/adapters";
-import {nanoid} from "nanoid"
+import { nanoid } from "nanoid";
 
 export const teachersTable = sqliteTable("teacher", {
   id: text("id")
@@ -29,54 +29,43 @@ export const studentsTable = sqliteTable("student", {
 });
 
 export const classTable = sqliteTable("class", {
-    id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
-    classCode: text("classCode").notNull().$defaultFn(() => nanoid(6)),
-    name: text("name").notNull(),
-    subject: text("subject").notNull(),
-    level: text("level").notNull(),
-    description: text("description"),
-    teacherId: text("teacher_id").notNull().references(() => teachersTable.id, { onDelete: 'cascade' }),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  classCode: text("classCode")
+    .notNull()
+    .$defaultFn(() => nanoid(6)),
+  name: text("name").notNull(),
+  subject: text("subject").notNull(),
+  level: text("level").notNull(),
+  description: text("description"),
+  teacherId: text("teacher_id")
+    .notNull()
+    .references(() => teachersTable.id, { onDelete: "cascade" }),
 });
 
-
-
-export const studentClassTable = sqliteTable('student_class', {
-    studentId: text('student_id').notNull().references(() => studentsTable.id, { onDelete: 'cascade' }),
-    classId: text('class_id').notNull().references(() => classTable.id, { onDelete: 'cascade' }),
+export const studentClassTable = sqliteTable(
+  "student_class",
+  {
+    studentId: text("student_id")
+      .notNull()
+      .references(() => studentsTable.id, { onDelete: "cascade" }),
+    classId: text("class_id")
+      .notNull()
+      .references(() => classTable.id, { onDelete: "cascade" }),
     // using a compound key to join the two tables
-  }, (studentClassTable) => ({
-    pk: primaryKey({columns: [studentClassTable.studentId, studentClassTable.classId]}) // pk is a compound key
-  }));
-
-  `
-  kode ini berhasil berjalan :
-  export const studentClassTable = sqliteTable('student_class', {
-    studentId: text('student_id').notNull().references(() => studentsTable.id, { onDelete: 'cascade' }),
-    classId: text('class_id').notNull().references(() => classTable.id, { onDelete: 'cascade' }),
-    // using a compound key to join the two tables
-  }, (studentClassTable) => ({
-    pk: primaryKey({columns: [studentClassTable.studentId, studentClassTable.classId]}) // pk is a compound key
-  }));
-
-  sedangkan kode ini akan menghasilkan error :
-  export const studentClassTable = sqliteTable('student_class', {
-    studentId: text('student_id').notNull().references(() => studentsTable.id, { onDelete: 'cascade' }),
-    classId: text('class_id').notNull().references(() => classTable.id, { onDelete: 'cascade' }),
-    // using a compound key to join the two tables
-  }, (table) => ({
-    pk: primaryKey({columns: [table.studentId, table.classId]}) // pk is a compound key
-  }));
-
-  bisakah kamu memberi penjelasan detail nya?
-
-  Tech stack : Nextjs 14, Drizzle, SQLite
-  `
+  },
+  (studentClassTable) => ({
+    pk: primaryKey({
+      columns: [studentClassTable.studentId, studentClassTable.classId],
+    }), // pk is a compound key
+  })
+);
 
 export const accountsTable = sqliteTable(
   "account",
   {
     userId: text("userId")
-
       .notNull()
       .references(() => studentsTable.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccountType>().notNull(),
