@@ -9,7 +9,7 @@ const ClassPage = () => {
     <div className="space-y-5">
         <div className="flex w-full gap-2">
             <SearchClassField/>
-            <Link href={"/teacher/class/create"} className="px-4 py-2 bg-green-600 rounded text-white font-medium whitespace-nowrap">Create Class</Link>
+            <Link href={"/teacher/class/create"} className="px-4 py-2 bg-green-500 rounded text-white font-medium whitespace-nowrap">Create Class</Link>
         </div>
         <div>
             <NoClassFoundCard/>
